@@ -1,0 +1,197 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art over Artist</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <h1>Welcome to Art over Artist</h1>
+  <p>Select your role to continue:</p>
+  <div class="login-options">
+    <a href="login/artist.html" class="btn">Artist Login</a>
+    <a href="login/venue.html" class="btn">Venue Login</a>
+    <a href="login/manager.html" class="btn">Manager Login</a>
+  </div>
+</body>
+</html>
+
+<!-- login/artist.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Login</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <h2>Artist Login</h2>
+  <form onsubmit="event.preventDefault(); window.location.href='../dashboard/artist-dashboard.html';">
+    <input type="text" placeholder="Username" required />
+    <input type="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>
+
+<!-- login/venue.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venue Login</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <h2>Venue Login</h2>
+  <form onsubmit="event.preventDefault(); window.location.href='../dashboard/venue-dashboard.html';">
+    <input type="text" placeholder="Username" required />
+    <input type="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>
+
+<!-- login/manager.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Login</title>
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+  <h2>Manager Login</h2>
+  <form onsubmit="event.preventDefault(); window.location.href='../dashboard/manager-dashboard.html';">
+    <input type="text" placeholder="Username" required />
+    <input type="password" placeholder="Password" required />
+    <button type="submit">Login</button>
+  </form>
+</body>
+</html>
+
+<!-- dashboard/artist-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artist Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <h2>Artist Dashboard</h2>
+  <p>Welcome, Artist! You have <strong>50 Arties</strong>.</p>
+  <ul>
+    <li><a href="#">View Gigs</a></li>
+    <li><a href="#">Send My Presskit</a></li>
+    <li><a href="#">Update Profile</a></li>
+    <li><a href="#">Search for Manager</a></li>
+  </ul>
+</body>
+</html>
+
+<!-- dashboard/venue-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venue Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <h2>Venue Dashboard</h2>
+  <p>Welcome, Venue! Post new gig opportunities.</p>
+  <ul>
+    <li><a href="#">Post Gig</a></li>
+    <li><a href="#">View Artist Matches</a></li>
+    <li><a href="#">Release Escrow</a></li>
+  </ul>
+</body>
+</html>
+
+<!-- dashboard/manager-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+  <h2>Manager Dashboard</h2>
+  <p>Welcome, Manager! Manage artists and venues.</p>
+  <ul>
+    <li><a href="#">Add Artist</a></li>
+    <li><a href="#">Add Venue</a></li>
+    <li><a href="#">View Applications</a></li>
+  </ul>
+</body>
+</html>
+
+<!-- assets/css/style.css -->
+body {
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+  background: #f4f4f4;
+  color: #333;
+}
+h1, h2 {
+  text-align: center;
+}
+.login-options {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.btn {
+  background: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+}
+form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+input, button {
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+button {
+  background: #28a745;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  max-width: 400px;
+  margin: auto;
+  margin-top: 2rem;
+}
+li {
+  background: white;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+li a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
