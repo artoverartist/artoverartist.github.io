@@ -2,49 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Art Over Artist</title>
-  <link rel="stylesheet" href="styles/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlueYard Inspired Site</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* === styles.css === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Helvetica Neue', sans-serif;
+      background-color: #000;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .container {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1.headline {
+      font-size: 3rem;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.2s ease-out forwards;
+      line-height: 1.3;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      opacity: 0;
+      animation: fadeIn 2s ease 1.5s forwards;
+    }
+
+    .fade {
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      h1.headline {
+        font-size: 2rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="navbar">
-    <div class="logo">Art<br>Artist</div>
-    <button class="dashboard-btn">Dashboard</button>
-  </header>
+  <canvas id="bg"></canvas>
+  <div class="container">
+    <h1 class="headline" id="headline">We back founders<br>who build the impossible.</h1>
+  </div>
+  <footer>
+    <p>© 2025 BlueYard Inspired. All rights reserved.</p>
+  </footer>
 
-  <section class="hero">
-    <h1>Book Gigs. Get Paid. Grow.</h1>
-    <h2><span class="powered">₹ Powered by Arties</span></h2>
-    <a href="#" class="demo-link">View Demo Features</a>
-    <p class="subtitle">
-      India's premier platform connecting artists, venues, and managers through a powerful points-based ecosystem powered by Arties.
-    </p>
-    <div class="cta">
-      <button class="signup">Sign up for free →</button>
-      <button class="learn">Learn how it works</button>
-    </div>
-  </section>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
+  <script>
+    // === script.js ===
+    const phrases = [
+      "We back founders<br>who build the impossible.",
+      "From Europe.<br>For the world.",
+      "Early believers.<br>Long-term partners."
+    ];
 
-  <section class="roles">
-    <div class="card">
-      <div class="circle green"></div>
-      <h3>For Venues</h3>
-      <p>Discover top talent and book the perfect acts for your events.</p>
-      <button class="role-btn">Join as Venue</button>
-    </div>
-    <div class="card">
-      <div class="circle red"></div>
-      <h3>For Managers & Promoters</h3>
-      <p>Manage multiple artists or venues and grow your business.</p>
-      <button class="role-btn">Join as Manager</button>
-    </div>
-    <div class="card">
-      <div class="circle purple"></div>
-      <h3>Find gigs, build your network, and showcase your talent.</h3>
-      <button class="role-btn">Join as Artist</button>
-    </div>
-  </section>
+    let current = 0;
+    const headline = document.getElementById('headline');
 
-  <script src="scripts/main.js"></script>
+    setInterval(() => {
+      current = (current + 1) % phrases.length;
+      headline.classList.remove('fade');
+      void headline.offsetWidth; // trigger reflow
+      headline.innerHTML = phrases[current];
+      headline.classList.add('fade');
+    }, 4000);
+
+    // === Three.js Background ===
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
+
+    const geometry = new THREE.TorusGeometry(2, 0.2, 16, 100);
+    const material = new THREE.MeshBasicMaterial({ color: 0x2779a7 });
+    const torus = new THREE.Mesh(geometry, material);
+    scene.add(torus);
+
+    function animate() {
+      requestAnimationFrame(animate);
+      torus.rotation.x += 0.005;
+      torus.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
 </body>
 </html>
