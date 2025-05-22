@@ -142,20 +142,20 @@
 
   <div class="form-section" id="formSection">
     <h2>Tell us about your venue</h2>
-    <form>
-      <input type="text" placeholder="Venue Name" required />
-      <input type="text" placeholder="Location (City)" required />
-      <input type="email" placeholder="Contact Email" required />
-      <input type="text" placeholder="Preferred Genres (e.g., Jazz, EDM)" />
-      <input type="number" placeholder="Monthly Budget (AED)" />
-      <select>
+    <form id="venueForm">
+      <input name="venue" type="text" placeholder="Venue Name" required />
+      <input name="location" type="text" placeholder="Location (City)" required />
+      <input name="email" type="email" placeholder="Contact Email" required />
+      <input name="genres" type="text" placeholder="Preferred Genres (e.g., Jazz, EDM)" />
+      <input name="budget" type="number" placeholder="Monthly Budget (AED)" />
+      <select name="frequency">
         <option value="">Event Frequency</option>
         <option>Once a week</option>
         <option>Twice a week</option>
         <option>Weekends only</option>
         <option>Custom</option>
       </select>
-      <textarea placeholder="Anything else we should know?" rows="4"></textarea>
+      <textarea name="notes" placeholder="Anything else we should know?" rows="4"></textarea>
       <button type="submit">Submit</button>
     </form>
   </div>
@@ -185,7 +185,6 @@
       headline.classList.add('fade');
     }, 4000);
 
-    // Three.js Background
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
@@ -211,11 +210,23 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Swipe to reveal form section
     setTimeout(() => {
       document.getElementById('intro').style.transform = 'translateX(-100vw)';
       document.getElementById('formSection').classList.add('active');
-    }, 10000); // After 10 seconds
+    }, 10000);
+
+    // Submit to backend (simulated with console and local download)
+    document.getElementById('venueForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const obj = {};
+      data.forEach((value, key) => obj[key] = value);
+      const blob = new Blob([JSON.stringify(obj, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'venue-submission.json';
+      a.click();
+    });
   </script>
 </body>
 </html>
