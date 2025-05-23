@@ -46,9 +46,9 @@
       background-color: #111;
       color: #fff;
       display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      justify-content: space-evenly;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 2rem;
       text-align: left;
       transition: left 1s ease-in-out;
@@ -86,37 +86,6 @@
       border-radius: 5px;
       font-size: 1rem;
       cursor: pointer;
-    }
-
-    .images-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      max-width: 400px;
-    }
-
-    .images-grid img {
-      width: 100%;
-      border-radius: 8px;
-      object-fit: cover;
-      height: 180px;
-    }
-
-    .graphic-style {
-      width: 100%;
-      max-width: 400px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .graphic-style img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-      border-radius: 10px;
     }
 
     h1.headline {
@@ -173,9 +142,6 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .images-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
@@ -186,19 +152,6 @@
   </div>
 
   <div class="form-container" id="form-block">
-    <div>
-      <div class="images-grid">
-        <img src="https://source.unsplash.com/featured/?concert" alt="Concert">
-        <img src="https://source.unsplash.com/featured/?music,artist" alt="Music Artist">
-        <img src="https://source.unsplash.com/featured/?dj,event" alt="DJ Event">
-        <img src="https://source.unsplash.com/featured/?band,performance" alt="Band Performance">
-      </div>
-      <div class="graphic-style">
-        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920057.png" alt="Mic Graphic" />
-        <img src="https://cdn-icons-png.flaticon.com/512/727/727218.png" alt="Music Note Graphic" />
-        <img src="https://cdn-icons-png.flaticon.com/512/1147/1147481.png" alt="Performer Graphic" />
-      </div>
-    </div>
     <form id="venueForm">
       <h2>Let us manage your venue's calendar</h2>
       <label for="venueName">Venue Name:</label>
@@ -297,4 +250,3 @@
     });
   </script>
 </body>
-</html>
