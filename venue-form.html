@@ -1,3 +1,4 @@
+--- venue-form.html ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,20 +7,50 @@
   <title>Venue Form</title>
   <link href="css/tailwind.output.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 p-8">
-  <h2 class="text-2xl mb-4">Plan Your Event</h2>
-  <form id="venueForm" class="bg-white p-6 rounded shadow">
-    <label>Preferred Genres</label>
-    <input name="genres" class="w-full border p-2 mb-4" required>
+<body class="bg-gradient-to-br from-purple-100 via-white to-indigo-100 min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-xl p-8 bg-white rounded-3xl shadow-2xl">
+    <h2 class="text-3xl font-bold text-indigo-800 mb-6 text-center">Plan Your Event</h2>
+    <form id="venueForm" class="space-y-6">
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Preferred Genre</label>
+        <select name="genres" class="w-full border border-gray-300 p-3 rounded-lg" required>
+          <option value="Pop">Pop</option>
+          <option value="Electronic">Electronic</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Rock">Rock</option>
+          <option value="Classical">Classical</option>
+        </select>
+      </div>
 
-    <label>Budget Range</label>
-    <input name="budget" class="w-full border p-2 mb-4" required>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Budget Range</label>
+        <select name="budget" class="w-full border border-gray-300 p-3 rounded-lg" required>
+          <option value="300">Up to $300</option>
+          <option value="500">Up to $500</option>
+          <option value="700">Up to $700</option>
+          <option value="1000">Up to $1000</option>
+        </select>
+      </div>
 
-    <label>Preferred Dates (comma-separated)</label>
-    <input name="dates" class="w-full border p-2 mb-4" required>
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Preferred Dates</label>
+        <input type="date" name="dates" class="w-full border border-gray-300 p-3 rounded-lg" multiple required>
+      </div>
 
-    <button class="bg-indigo-600 text-white px-4 py-2 rounded" type="submit">Submit</button>
-  </form>
+      <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300" type="submit">
+        Find Matches
+      </button>
+    </form>
+  </div>
   <script src="js/formHandler.js"></script>
 </body>
 </html>
+
+--- js/formHandler.js ---
+document.getElementById("venueForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData.entries());
+  localStorage.setItem("venuePreferences", JSON.stringify(data));
+  window.location.href = "match-results.html";
+});
