@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Venue Form</title>
+  <link href="css/tailwind.output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-8">
+  <h2 class="text-2xl mb-4">Plan Your Event</h2>
+  <form id="venueForm" class="bg-white p-6 rounded shadow">
+    <label>Preferred Genres</label>
+    <input name="genres" class="w-full border p-2 mb-4" required>
+
+    <label>Budget Range</label>
+    <input name="budget" class="w-full border p-2 mb-4" required>
+
+    <label>Preferred Dates (comma-separated)</label>
+    <input name="dates" class="w-full border p-2 mb-4" required>
+
+    <button class="bg-indigo-600 text-white px-4 py-2 rounded" type="submit">Submit</button>
+  </form>
+  <script src="js/formHandler.js"></script>
+</body>
+</html>
