@@ -43,7 +43,7 @@
       left: 100vw;
       height: 100vh;
       width: 100vw;
-      background-color: #111;
+      background: linear-gradient(to bottom right, #1f1c2c, #928dab);
       color: #fff;
       display: flex;
       flex-direction: row;
@@ -65,6 +65,10 @@
       width: 100%;
       max-width: 400px;
       margin-top: 0;
+      background-color: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
     }
 
     label {
@@ -79,7 +83,7 @@
     }
 
     button {
-      background-color: #2779a7;
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
       color: white;
       padding: 0.75rem;
       border: none;
@@ -123,7 +127,7 @@
       width: 100%;
       text-align: center;
       font-size: 0.85rem;
-      color: #777;
+      color: #ccc;
       opacity: 0;
       animation: fadeIn 2s ease 1.5s forwards;
     }
@@ -168,10 +172,11 @@
     </div>
     <form id="venueForm">
       <h2>Get your free roster today</h2>
+
       <label for="venueName">Venue Name:</label>
       <input type="text" id="venueName" name="venueName" required />
 
-      <label for="city">City:</label>
+      <label for="city">Location:</label>
       <select id="city" name="city" required>
         <option value="">Select a city</option>
         <option value="Pune">Pune</option>
@@ -184,10 +189,36 @@
       </select>
 
       <label for="genre">Preferred Genre:</label>
-      <input type="text" id="genre" name="genre" required />
+      <select id="genre" name="genre" required>
+        <option value="Pop">Pop</option>
+        <option value="Rock">Rock</option>
+        <option value="Electronic">Electronic</option>
+        <option value="Jazz">Jazz</option>
+        <option value="Classical">Classical</option>
+        <option value="Indie">Indie</option>
+      </select>
+
+      <label for="frequency">Gig Frequency:</label>
+      <select id="frequency" name="frequency">
+        <option value="Weekly">Weekly</option>
+        <option value="Bi-weekly">Bi-weekly</option>
+        <option value="Monthly">Monthly</option>
+      </select>
 
       <label for="budget">Monthly Budget (₹):</label>
-      <input type="number" id="budget" name="budget" required />
+      <select id="budget" name="budget" required>
+        <option value="300">Up to ₹3000</option>
+        <option value="500">Up to ₹5000</option>
+        <option value="700">Up to ₹7000</option>
+        <option value="1000">Up to ₹10,000</option>
+        <option value="1500">Above ₹10,000</option>
+      </select>
+
+      <label for="gigTimings">Preferred Gig Timings:</label>
+      <input type="text" id="gigTimings" name="gigTimings" placeholder="e.g. Fridays 8-10 PM" />
+
+      <label for="fnb">Artist F&B Policy:</label>
+      <textarea id="fnb" name="fnb" placeholder="e.g. 2 drinks and 1 meal provided per artist"></textarea>
 
       <button type="submit">Submit</button>
     </form>
@@ -230,7 +261,7 @@
     camera.position.z = 5;
 
     const geometry = new THREE.TorusGeometry(2, 0.2, 16, 100);
-    const material = new THREE.MeshBasicMaterial({ color: 0x2779a7 });
+    const material = new THREE.MeshBasicMaterial({ color: 0xff4b2b });
     const torus = new THREE.Mesh(geometry, material);
     scene.add(torus);
 
@@ -250,12 +281,7 @@
 
     document.getElementById('venueForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const data = {
-        venueName: this.venueName.value,
-        city: this.city.value,
-        genre: this.genre.value,
-        budget: this.budget.value
-      };
+      const data = Object.fromEntries(new FormData(this).entries());
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
