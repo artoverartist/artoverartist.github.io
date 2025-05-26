@@ -2,21 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Stagecraft 2025</title>
+  <link rel="stylesheet" href="styles.css" />
   <style>
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
+
     html, body {
-      height: 100%; width: 100%;
+      height: 100%;
+      width: 100%;
       font-family: 'Helvetica Neue', sans-serif;
       background-color: #000;
       color: #fff;
       overflow: hidden;
     }
+
     .container {
-      height: 100vh; width: 100vw;
+      height: 100vh;
+      width: 100vw;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -24,17 +31,18 @@
       padding: 2rem;
       text-align: center;
       transition: transform 1s ease-in-out;
-      position: relative;
-      z-index: 10;
-      background: #000;
     }
+
     .container.slide-left {
-      transform: translateX(-100vw);
+      transform: translateX(-100%);
     }
+
     .form-container {
-      position: fixed;
-      top: 0; left: 100vw;
-      height: 100vh; width: 100vw;
+      position: absolute;
+      top: 0;
+      left: 100vw;
+      height: 100vh;
+      width: 100vw;
       background: linear-gradient(to bottom right, #1f1c2c, #928dab);
       color: #fff;
       display: flex;
@@ -44,33 +52,36 @@
       padding: 2rem;
       text-align: left;
       transition: left 1s ease-in-out;
-      overflow-y: auto;
-      z-index: 20;
     }
+
     .form-container.show {
       left: 0;
     }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
       width: 100%;
       max-width: 400px;
+      margin-top: 0;
       background-color: rgba(0,0,0,0.5);
       padding: 2rem;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(255,255,255,0.2);
-      color: #fff;
     }
+
     label {
       font-size: 1rem;
     }
+
     input, select, textarea {
       padding: 0.75rem;
       font-size: 1rem;
       border: none;
       border-radius: 5px;
     }
+
     button {
       background: linear-gradient(to right, #ff416c, #ff4b2b);
       color: white;
@@ -80,67 +91,64 @@
       font-size: 1rem;
       cursor: pointer;
     }
+
     .form-image {
       max-width: 400px;
-      margin-left: 2rem;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 25px rgba(255,75,43,0.7);
     }
+
     .form-image img {
       width: 100%;
       height: auto;
-      display: block;
+      border-radius: 10px;
+      object-fit: cover;
     }
+
     h1.headline {
       font-size: 3rem;
       font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1.2s ease-out forwards;
       line-height: 1.3;
-      opacity: 1;
-      transition: opacity 0.8s ease;
     }
-    .fade-out {
-      opacity: 0 !important;
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
     }
-    .extra-buttons {
-      display: none;
-      flex-direction: column;
-      gap: 1rem;
-      align-items: center;
-      margin-top: 2rem;
-      width: 100%;
-      max-width: 400px;
-    }
-    .extra-buttons.show {
-      display: flex;
-    }
-    .extra-buttons .btn {
-      background: linear-gradient(45deg, #ff416c, #ff4b2b);
-      color: white;
-      padding: 0.85rem 1.5rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      box-shadow: 0 4px 15px rgba(255,75,43,0.5);
-      transition: transform 0.2s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      width: 100%;
-      text-align: center;
-    }
-    .extra-buttons .btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(255,75,43,0.8);
-    }
+
     footer {
-      position: fixed;
+      position: absolute;
       bottom: 20px;
       width: 100%;
       text-align: center;
       font-size: 0.85rem;
       color: #ccc;
-      z-index: 30;
+      opacity: 0;
+      animation: fadeIn 2s ease 1.5s forwards;
     }
+
+    .fade {
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
     @media (max-width: 768px) {
       h1.headline {
         font-size: 2rem;
@@ -149,24 +157,20 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .form-image {
-        margin-left: 0;
-        margin-top: 1rem;
-        max-width: 100%;
-      }
-      .extra-buttons .btn {
-        width: 100%;
-      }
     }
   </style>
 </head>
 <body>
+  <canvas id="bg"></canvas>
   <div class="container" id="animation-block">
     <h1 class="headline" id="headline">Stagecraft is your partner in seamless programming.</h1>
   </div>
 
-  <div class="form-container" id="form-block" aria-hidden="true">
-    <form id="venueForm" aria-label="Venue Submission Form">
+  <div class="form-container" id="form-block">
+    <div class="form-image">
+      <img src="https://wallpapers.com/images/hd/aesthetic-music-concert-and-crowd-q80rl8wtb227a8ls.jpg" alt="Concert Crowd" />
+    </div>
+    <form id="venueForm">
       <h2>Get your free roster today</h2>
 
       <label for="venueName">Venue Name:</label>
@@ -203,11 +207,11 @@
 
       <label for="budget">Monthly Budget (₹):</label>
       <select id="budget" name="budget" required>
-        <option value="3000">Up to ₹3000</option>
-        <option value="5000">Up to ₹5000</option>
-        <option value="7000">Up to ₹7000</option>
-        <option value="10000">Up to ₹10,000</option>
-        <option value="15000">Above ₹10,000</option>
+        <option value="300">Up to ₹3000</option>
+        <option value="500">Up to ₹5000</option>
+        <option value="700">Up to ₹7000</option>
+        <option value="1000">Up to ₹10,000</option>
+        <option value="1500">Above ₹10,000</option>
       </select>
 
       <label for="gigTimings">Preferred Gig Timings:</label>
@@ -217,22 +221,14 @@
       <textarea id="fnb" name="fnb" placeholder="e.g. 2 drinks and 1 meal provided per artist"></textarea>
 
       <button type="submit">Submit</button>
-
-      <div class="extra-buttons" id="extraButtons">
-        <a href="match-results.html" class="btn" tabindex="0">Sample Artist Profiles</a>
-        <a href="venue-form.html" class="btn" tabindex="0">Try out this fun quiz to know your venue's taste</a>
-      </div>
     </form>
-
-    <div class="form-image">
-      <img src="https://wallpapers.com/images/hd/aesthetic-music-concert-and-crowd-q80rl8wtb227a8ls.jpg" alt="Concert Crowd" />
-    </div>
   </div>
 
   <footer>
     <p>© 2025 Stagecraft. All rights reserved.</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/three@0.152.2/build/three.min.js"></script>
   <script>
     const phrases = [
       "Stagecraft is your partner in seamless programming.",
@@ -244,56 +240,56 @@
 
     let current = 0;
     const headline = document.getElementById('headline');
-    const animationBlock = document.getElementById('animation-block');
-    const formBlock = document.getElementById('form-block');
-    const extraButtons = document.getElementById('extraButtons');
 
-    function showPhrase(index) {
-      // fade out
-      headline.style.opacity = 0;
-      setTimeout(() => {
-        headline.innerHTML = phrases[index];
-        headline.style.opacity = 1;
-      }, 600);
-    }
+    setInterval(() => {
+      current = (current + 1) % phrases.length;
+      headline.classList.remove('fade');
+      void headline.offsetWidth;
+      headline.innerHTML = phrases[current];
+      headline.classList.add('fade');
+    }, 4000);
 
-    function cyclePhrases() {
-      current++;
-      if(current >= phrases.length) current = 0;
-      showPhrase(current);
-    }
-
-    // cycle every 4 seconds
-    const phraseInterval = setInterval(cyclePhrases, 4000);
-
-    // After all phrases (5 phrases * 4s = 20s), show form & buttons
     setTimeout(() => {
-      clearInterval(phraseInterval);
+      document.getElementById('animation-block').classList.add('slide-left');
+      document.getElementById('form-block').classList.add('show');
+    }, 10000);
 
-      // fade out animation block completely
-      animationBlock.style.opacity = 0;
-      setTimeout(() => {
-        animationBlock.style.display = 'none';
-      }, 1000);
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 5;
 
-      // show form block by sliding in
-      formBlock.classList.add('show');
-      formBlock.setAttribute('aria-hidden', 'false');
+    const geometry = new THREE.TorusGeometry(2, 0.2, 16, 100);
+    const material = new THREE.MeshBasicMaterial({ color: 0xff4b2b });
+    const torus = new THREE.Mesh(geometry, material);
+    scene.add(torus);
 
-      // show buttons below form
-      extraButtons.classList.add('show');
-    }, 20500); // 20.5 seconds so all phrases complete once
+    function animate() {
+      requestAnimationFrame(animate);
+      torus.rotation.x += 0.005;
+      torus.rotation.y += 0.01;
+      renderer.render(scene, camera);
+    }
+    animate();
 
-    // Form submit behavior - download JSON
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
     document.getElementById('venueForm').addEventListener('submit', function(e) {
       e.preventDefault();
       const data = Object.fromEntries(new FormData(this).entries());
       const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `${data.venueName.replace(/\s+/g, '_')}_submission.json`;
+      a.download = ${data.venueName.replace(/\s+/g, '_')}_submission.json;
       a.click();
     });
   </script>
 </body>
 </html>
+
+
