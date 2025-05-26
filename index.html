@@ -6,8 +6,6 @@
   <title>Stagecraft 2025</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
-    /* Existing styles... */
-
     * {
       margin: 0;
       padding: 0;
@@ -39,39 +37,70 @@
       transform: translateX(-100%);
     }
 
-    /* Button container for spacing */
-    .button-group {
-      margin-top: 2rem;
+    .form-container {
+      position: absolute;
+      top: 0;
+      left: 100vw;
+      height: 100vh;
+      width: 100vw;
+      background: linear-gradient(to bottom right, #1f1c2c, #928dab);
+      color: #fff;
       display: flex;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      padding: 2rem;
+      text-align: left;
+      transition: left 1s ease-in-out;
+    }
+
+    .form-container.show {
+      left: 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
       width: 100%;
+      max-width: 400px;
+      margin-top: 0;
+      background-color: rgba(0,0,0,0.5);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+
+    label {
+      font-size: 1rem;
+    }
+
+    input, select, textarea {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: linear-gradient(to right, #ff416c, #ff4b2b);
+      color: white;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .form-image {
       max-width: 400px;
     }
 
-    /* Stylish buttons */
-    .nav-button {
-      background: linear-gradient(45deg, #ff416c, #ff4b2b);
-      border: none;
-      color: white;
-      padding: 0.75rem 2rem;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      font-weight: 600;
-      text-decoration: none;
-      box-shadow: 0 4px 15px rgba(255, 75, 43, 0.5);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: inline-block;
-      user-select: none;
-    }
-
-    .nav-button:hover,
-    .nav-button:focus {
-      transform: scale(1.05);
-      box-shadow: 0 6px 25px rgba(255, 75, 43, 0.8);
-      outline: none;
+    .form-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      object-fit: cover;
     }
 
     h1.headline {
@@ -107,6 +136,36 @@
       animation: fadeInUp 1.2s ease-out forwards;
     }
 
+    /* New styles for the extra buttons */
+    .extra-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .extra-buttons .btn {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      color: white;
+      padding: 0.85rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(255,75,43,0.5);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      width: 280px;
+      text-align: center;
+    }
+
+    .extra-buttons .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255,75,43,0.8);
+    }
+
     @keyframes fadeInUp {
       to {
         opacity: 1;
@@ -128,9 +187,8 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .button-group {
-        flex-direction: column;
-        gap: 1rem;
+      .extra-buttons .btn {
+        width: 100%;
       }
     }
   </style>
@@ -139,10 +197,6 @@
   <canvas id="bg"></canvas>
   <div class="container" id="animation-block">
     <h1 class="headline" id="headline">Stagecraft is your partner in seamless programming.</h1>
-    <div class="button-group">
-      <a href="venue-form.html" class="nav-button" aria-label="Go to Venue Form">Submit Venue Details</a>
-      <a href="match-results.html" class="nav-button" aria-label="View Match Results">View Match Results</a>
-    </div>
   </div>
 
   <div class="form-container" id="form-block">
@@ -201,6 +255,11 @@
 
       <button type="submit">Submit</button>
     </form>
+
+    <div class="extra-buttons" style="display: none;">
+      <a href="match-results.html" class="btn">Sample Artist Profiles</a>
+      <a href="venue-form.html" class="btn">Try out this fun quiz to know your venue's taste</a>
+    </div>
   </div>
 
   <footer>
@@ -212,61 +271,4 @@
     const phrases = [
       "Stagecraft is your partner in seamless programming.",
       "No more last-minute calls.<br> No more empty slots.",
-      "Filter from curated artist profiles.",
-      "We manage your entire event calendar—so you can focus on what matters:<br>creating unforgettable memories.",
-      "No contracts. No hassle.<br>Just music that makes sense."
-    ];
-
-    let current = 0;
-    const headline = document.getElementById('headline');
-
-    setInterval(() => {
-      current = (current + 1) % phrases.length;
-      headline.classList.remove('fade');
-      void headline.offsetWidth;
-      headline.innerHTML = phrases[current];
-      headline.classList.add('fade');
-    }, 4000);
-
-    setTimeout(() => {
-      document.getElementById('animation-block').classList.add('slide-left');
-      document.getElementById('form-block').classList.add('show');
-    }, 10000);
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.position.z = 5;
-
-    const geometry = new THREE.TorusGeometry(2, 0.2, 16, 100);
-    const material = new THREE.MeshBasicMaterial({ color: 0xff4b2b });
-    const torus = new THREE.Mesh(geometry, material);
-    scene.add(torus);
-
-    function animate() {
-      requestAnimationFrame(animate);
-      torus.rotation.x += 0.005;
-      torus.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    }
-    animate();
-
-    window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    document.getElementById('venueForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(this).entries());
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = `${data.venueName.replace(/\s+/g, '_')}_submission.json`;
-      a.click();
-    });
-  </script>
-</body>
-</html>
+      "Filter f
