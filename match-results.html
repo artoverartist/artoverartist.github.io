@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Match Results</title>
-  <link href="css/tailwind.output.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Artist Match Results - Stagecraft</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', sans-serif;
+      background: linear-gradient(to right, #141e30, #243b55);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card-container {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 2rem;
+      padding: 2rem;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .artist-card {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      width: 300px;
+      height: 500px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s ease;
+    }
+
+    .artist-card:hover {
+      transform: scale(1.05);
+    }
+
+    .artist-image {
+      width: 100%;
+      height: 60%;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .artist-details {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .artist-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .artist-rating {
+      display: flex;
+      gap: 0.25rem;
+      color: gold;
+    }
+
+    .artist-review {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    .feedback-button {
+      margin-top: auto;
+      background: #ff4b2b;
+      border: none;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+  </style>
 </head>
-<body class="p-8 bg-white">
-  <h2 class="text-3xl mb-6">Top Artist Matches</h2>
-  <div id="results" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3"></div>
-  <script src="libs/papaparse.min.js"></script>
-  <script src="js/matchEngine.js"></script>
+<body>
+  <div class="card-container">
+    <div class="artist-card">
+      <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4');"></div>
+      <div class="artist-details">
+        <div class="artist-name">Aarya</div>
+        <div class="artist-rating">★★★★★</div>
+        <div class="artist-review">“Aarya’s voice lit up our Friday night gig—simply magical!”</div>
+        <button class="feedback-button">View Full Profile</button>
+      </div>
+    </div>
+
+    <div class="artist-card">
+      <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1509228627159-6452d3d16d53');"></div>
+      <div class="artist-details">
+        <div class="artist-name">Rebel Riffs</div>
+        <div class="artist-rating">★★★★☆</div>
+        <div class="artist-review">“Energetic and engaging! Great for high-energy nights.”</div>
+        <button class="feedback-button">View Full Profile</button>
+      </div>
+    </div>
+
+    <div class="artist-card">
+      <div class="artist-image" style="background-image: url('https://images.unsplash.com/photo-1497034825429-c343d7c6a68f');"></div>
+      <div class="artist-details">
+        <div class="artist-name">DJ Nova</div>
+        <div class="artist-rating">★★★★★</div>
+        <div class="artist-review">“Perfect blend of EDM and Bollywood beats. Crowd loved it!”</div>
+        <button class="feedback-button">View Full Profile</button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
