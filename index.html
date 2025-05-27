@@ -1,290 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Flow - Venue Submission</title>
-<style>
-  /* Global styles and font */
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ask Eve - Venue Entry</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-  body, html {
-    margin: 0; padding: 0; height: 100%; background: #121212;
-    color: #f0f0f0; font-family: 'Inter', Arial, sans-serif;
-    display: flex; flex-direction: column; min-height: 100vh;
-  }
-
-  /* Navigation bar */
-  nav {
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
-    display: flex; align-items: center; padding: 0 1.5rem;
-    height: 60px; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-  }
-  nav img.logo {
-    height: 40px;
-  }
-  nav ul {
-    list-style: none; margin-left: auto; display: flex; gap: 1.5rem;
-  }
-  nav ul li a {
-    color: #fff; text-decoration: none; font-weight: 600;
-    font-size: 1rem; padding: 0.5rem 0;
-    transition: color 0.3s ease;
-  }
-  nav ul li a:hover,
-  nav ul li a:focus {
-    color: #ffe3e3;
-  }
-
-  /* Center content wrapper */
-  main {
-    flex: 1;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    padding: 1rem;
-    background: #1a1a1a;
-  }
-
-  /* Animation text */
-  #animation {
-    font-size: 1.8rem; max-width: 600px; text-align: center;
-    transition: opacity 0.8s ease;
-    margin-bottom: 2rem;
-    font-weight: 600;
-    line-height: 1.3;
-    color: #ff4b2b;
-  }
-  #animation.hidden {
-    opacity: 0; pointer-events: none;
-  }
-
-  /* Form container */
-  #form-container {
-    display: none;
-    flex-direction: column;
-    max-width: 420px;
-    width: 100%;
-    background: #222;
-    padding: 25px 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(255, 75, 43, 0.25);
-  }
-  #form-container.show {
-    display: flex;
-  }
-
-  /* Form labels and inputs */
-  label {
-    margin-top: 15px;
-    font-weight: 600;
-    font-size: 1rem;
-    color: #ff4b2b;
-  }
-  input, select, textarea {
-    margin-top: 6px;
-    padding: 10px 12px;
-    border-radius: 6px;
-    border: none;
-    width: 100%;
-    font-size: 1rem;
-    font-family: 'Inter', Arial, sans-serif;
-    background: #333;
-    color: #eee;
-    transition: background-color 0.3s ease;
-  }
-  input:focus, select:focus, textarea:focus {
-    background: #ff4b2b;
-    color: #121212;
-    outline: none;
-  }
-  textarea {
-    resize: vertical;
-    min-height: 80px;
-  }
-
-  /* Submit button */
-  button.submit-btn {
-    margin-top: 25px;
-    padding: 14px;
-    font-size: 1.15rem;
-    font-weight: 700;
-    background: linear-gradient(90deg, #ff416c, #ff4b2b);
-    border: none;
-    border-radius: 30px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  button.submit-btn:hover,
-  button.submit-btn:focus {
-    background: #ff6650;
-    outline: none;
-  }
-
-  /* Buttons container */
-  .buttons {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  .buttons a {
-    background: #ff4b2b;
-    padding: 12px;
-    border-radius: 25px;
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  .buttons a:hover,
-  .buttons a:focus {
-    background: #ff6650;
-    outline: none;
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 480px) {
-    #animation {
-      font-size: 1.4rem;
-      padding: 0 1rem;
+    /* Reset */
+    * {
+      box-sizing: border-box;
     }
-    #form-container {
-      max-width: 95%;
-      padding: 20px;
+
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(135deg, #000000, #1c1c1c);
+      color: #f8f8f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+      animation: fadeInBody 1.2s ease forwards;
     }
-  }
-</style>
+
+    /* Fade in animation */
+    @keyframes fadeInBody {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    /* Brand logo Ask Eve */
+    #brand {
+      font-family: 'Helvetica', sans-serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 3.8rem;
+      color: #ff1493;
+      text-shadow:
+        2px 2px 4px #000000cc,
+        0 0 12px #ff1493,
+        0 0 24px #ff1493;
+      margin: 2rem 0 0.5rem;
+      user-select: none;
+      cursor: default;
+      animation: fadeInBrand 1.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInBrand {
+      to {opacity: 1;}
+    }
+
+    /* Tagline */
+    #tagline {
+      font-size: 1.15rem;
+      color: #ff1493cc;
+      margin-bottom: 2.5rem;
+      font-weight: 600;
+      font-style: italic;
+      text-align: center;
+      max-width: 400px;
+      user-select: none;
+      animation: fadeInTagline 1.8s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInTagline {
+      to {opacity: 1;}
+    }
+
+    /* Navigation menu */
+    nav {
+      display: flex;
+      gap: 2rem;
+      background: rgba(255, 20, 147, 0.1);
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      box-shadow:
+        0 4px 10px #ff1493aa,
+        inset 0 0 8px #ff1493aa;
+      user-select: none;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 960px;
+      animation: fadeInNav 2.1s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInNav {
+      to {opacity: 1;}
+    }
+
+    nav a {
+      color: #ff1493;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 0.3rem 0.9rem;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+
+    nav a:hover, nav a:focus {
+      color: #fff;
+      background: #ff1493;
+      box-shadow: 0 0 10px #ff1493aa;
+      outline: none;
+    }
+
+    /* Venue Entry Form */
+    form {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px #ff1493bb;
+      max-width: 460px;
+      width: 90%;
+      animation: fadeInForm 2.4s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeInForm {
+      to {opacity: 1;}
+    }
+
+    form h2 {
+      margin-top: 0;
+      color: #ff1493;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      user-select: none;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #ff1493cc;
+      user-select: none;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      width: 100%;
+      padding: 0.7rem 1rem;
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      font-family: 'Poppins', sans-serif;
+      background: #111111;
+      color: #f8f8f8;
+      box-shadow: inset 0 0 5px #ff1493bb;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 0 10px #ff1493cc;
+      background: #1a1a1a;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button[type="submit"] {
+      background: #ff1493;
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff1493bb;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button[type="submit"]:hover,
+    button[type="submit"]:focus {
+      background: #e60073;
+      outline: none;
+      box-shadow: 0 0 20px #e60073cc;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #brand {
+        font-size: 2.8rem;
+      }
+      #tagline {
+        max-width: 90vw;
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+      nav {
+        gap: 1rem;
+        padding: 0.8rem 1rem;
+        max-width: 100vw;
+      }
+      nav a {
+        font-size: 1rem;
+      }
+      form {
+        padding: 1.5rem 2rem;
+        max-width: 90vw;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <img src="your-logo.png" alt="Flow Logo" class="logo" />
-  <ul>
-    <li><a href="index.html" tabindex="0">Home</a></li>
-    <li><a href="venue-form.html" tabindex="0">Venue Quiz</a></li>
-    <li><a href="match-results.html" tabindex="0">Artist Profiles</a></li>
-    <li><a href="qr-tip.html" tabindex="0">Tip Artists</a></li>
-    <li><a href="login.html" tabindex="0">Login</a></li>
-  </ul>
-</nav>
+  <header>
+    <div id="brand" aria-label="Brand name Ask Eve">Ask Eve</div>
+    <div id="tagline">Ask Eve. She's quick, in the know, and your new best friend.</div>
+    <nav role="navigation" aria-label="Primary navigation menu">
+      <a href="index.html" tabindex="0" aria-current="page">Home</a>
+      <a href="venue-form.html" tabindex="0">Venue Form</a>
+      <a href="match-results.html" tabindex="0">Match Results</a>
+      <a href="qr-tip.html" tabindex="0">QR Tip</a>
+      <a href="login.html" tabindex="0">Login</a>
+    </nav>
+  </header>
 
-<main>
-  <div id="animation">Stagecraft is your partner in seamless programming.</div>
+  <main>
+    <form action="save-venue-entry.php" method="POST" aria-label="Venue entry form">
+      <h2>Venue Entry</h2>
 
-  <div id="form-container" aria-hidden="true">
-    <form id="venueForm" aria-label="Venue Submission Form">
-      <label for="venueName">Venue Name:</label>
-      <input type="text" id="venueName" name="venueName" required />
+      <label for="venueName">Venue Name</label>
+      <input type="text" id="venueName" name="venueName" required placeholder="Enter venue name" />
 
-      <label for="city">Location:</label>
-      <select id="city" name="city" required>
-        <option value="">Select a city</option>
-        <option value="Pune">Pune</option>
-        <option value="Bangalore">Bangalore</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Chennai">Chennai</option>
-        <option value="Hyderabad">Hyderabad</option>
-        <option value="Jaipur">Jaipur</option>
-      </select>
+      <label for="contactEmail">Contact Email</label>
+      <input type="email" id="contactEmail" name="contactEmail" required placeholder="Enter contact email" />
 
-      <label for="genre">Preferred Genre:</label>
-      <select id="genre" name="genre" required>
-        <option value="Pop">Pop</option>
-        <option value="Rock">Rock</option>
-        <option value="Electronic">Electronic</option>
-        <option value="Jazz">Jazz</option>
-        <option value="Classical">Classical</option>
-        <option value="Indie">Indie</option>
-      </select>
+      <label for="location">Location</label>
+      <input type="text" id="location" name="location" required placeholder="City, Area, etc." />
 
-      <label for="frequency">Gig Frequency:</label>
-      <select id="frequency" name="frequency">
-        <option value="Weekly">Weekly</option>
-        <option value="Bi-weekly">Bi-weekly</option>
-        <option value="Monthly">Monthly</option>
-      </select>
+      <label for="notes">Additional Notes</label>
+      <textarea id="notes" name="notes" placeholder="Anything else you'd like to add?"></textarea>
 
-      <label for="budget">Monthly Budget (₹):</label>
-      <select id="budget" name="budget" required>
-        <option value="3000">Up to ₹3000</option>
-        <option value="5000">Up to ₹5000</option>
-        <option value="7000">Up to ₹7000</option>
-        <option value="10000">Up to ₹10,000</option>
-        <option value="15000">Above ₹10,000</option>
-      </select>
-
-      <label for="gigTimings">Preferred Gig Timings:</label>
-      <input type="text" id="gigTimings" name="gigTimings" placeholder="e.g. Fridays 8-10 PM" />
-
-      <label for="fnb">Artist F&B Policy:</label>
-      <textarea id="fnb" name="fnb" placeholder="e.g. 2 drinks and 1 meal provided per artist"></textarea>
-
-      <button type="submit" class="submit-btn">Submit</button>
-
-      <div class="buttons">
-        <a href="match-results.html" tabindex="0">Sample Artist Profiles</a>
-        <a href="venue-form.html" tabindex="0">Try out this fun quiz to know your venue's taste</a>
-      </div>
+      <button type="submit">Submit Venue</button>
     </form>
-  </div>
-</main>
-
-<script>
-  const phrases = [
-    "Stagecraft is your partner in seamless programming.",
-    "No more last-minute calls. No more empty slots.",
-    "Filter from curated artist profiles.",
-    "We manage your entire event calendar—so you can focus on what matters: creating unforgettable memories.",
-    "No contracts. No hassle. Just music that makes sense."
-  ];
-
-  const animationDiv = document.getElementById('animation');
-  const formContainer = document.getElementById('form-container');
-
-  let index = 0;
-
-  function showNextPhrase() {
-    animationDiv.style.opacity = 0;  // fade out
-    setTimeout(() => {
-      animationDiv.textContent = phrases[index];
-      animationDiv.style.opacity = 1;  // fade in
-      index++;
-      if(index >= phrases.length) {
-        clearInterval(interval);
-        // After last phrase show, hide animation, show form & buttons
-        setTimeout(() => {
-          animationDiv.classList.add('hidden');
-          formContainer.classList.add('show');
-          formContainer.setAttribute('aria-hidden', 'false');
-        }, 1500); // wait so last phrase visible briefly before transition
-      }
-    }, 800);
-  }
-
-  // Start cycling phrases every 4 seconds
-  showNextPhrase(); // show first immediately
-  const interval = setInterval(() => {
-    if(index < phrases.length) {
-      showNextPhrase();
-    }
-  }, 4000);
-
-  // Form submit downloads JSON file
-  document.getElementById('venueForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target).entries());
-    const blob = new Blob([JSON.stringify(formData, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    const fileName = (formData.venueName || "venue") + "_submission.json";
-    a.download = fileName.replace(/\s+/g, '_');
-    a.click();
-  });
-</script>
+  </main>
 
 </body>
 </html>
