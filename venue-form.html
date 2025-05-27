@@ -6,56 +6,66 @@
   <title>Flow - Venue Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
+    /* Base and retro colors */
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: 'Poppins', sans-serif;
+      background-color: #000;
       color: #fff;
-      background: #000;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
     nav {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 1em;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       width: 100%;
       position: fixed;
       top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1em 2em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 0 10px #FF4B2B;
       z-index: 1000;
     }
 
     nav h1 {
       margin: 0;
-      font-size: 1.5em;
+      font-size: 1.8rem;
       color: #FF4B2B;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-family: 'Poppins', sans-serif;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 1em;
-      font-weight: 500;
+      margin-left: 1.5em;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
     nav a:hover {
       color: #FF4B2B;
     }
 
+    /* Container styling with retro border */
     .storybook {
-      width: 90%;
-      max-width: 600px;
+      margin-top: 100px;
       background: #1a1a1a;
       border: 4px solid #FF4B2B;
       box-shadow: 0 10px 25px rgba(255, 75, 43, 0.3);
       border-radius: 12px;
-      padding: 2rem;
-      margin-top: 100px;
+      width: 90%;
+      max-width: 600px;
+      padding: 2.5rem 3rem;
       animation: openBook 1s ease-in-out;
     }
 
@@ -65,10 +75,53 @@
     }
 
     h1 {
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 1rem;
       color: #FF4B2B;
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    label {
+      display: block;
+      margin-top: 1.4rem;
+      font-weight: 600;
+      color: #fff;
+      font-size: 1.1rem;
+    }
+
+    select {
+      width: 100%;
+      margin-top: 0.6rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      background-color: #333;
+      border: none;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 500;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 0.85rem;
+      background-color: #FF4B2B;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      background-color: #e64321;
     }
 
     .page {
@@ -85,44 +138,13 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    label {
-      font-weight: 600;
-      margin-top: 1rem;
-      display: block;
-      color: #fff;
-    }
-
-    select, button {
-      width: 100%;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-      border-radius: 8px;
-      font-size: 1rem;
-      border: none;
-    }
-
-    select {
-      background: #333;
-      color: #fff;
-    }
-
-    button {
-      margin-top: 2rem;
-      background: #FF4B2B;
-      color: white;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    button:hover {
-      background: #e64321;
-    }
-
     .result {
       text-align: center;
       font-size: 1.5rem;
       margin-top: 1.5rem;
       color: #FFDDC1;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
     }
   </style>
 </head>
@@ -142,8 +164,9 @@
     <h1>Tell Us Your Tale</h1>
     <form id="venueQuiz">
       <div class="page active">
-        <label>What kind of vibe does your venue have?</label>
-        <select name="vibe">
+        <label for="vibe">What kind of vibe does your venue have?</label>
+        <select name="vibe" id="vibe" required>
+          <option value="" disabled selected>Select vibe</option>
           <option value="mellow">Mellow and soulful</option>
           <option value="electric">Electric and loud</option>
           <option value="eclectic">Eclectic and vibrant</option>
@@ -152,8 +175,9 @@
       </div>
 
       <div class="page">
-        <label>What’s your ideal Friday night show?</label>
-        <select name="show">
+        <label for="show">What’s your ideal Friday night show?</label>
+        <select name="show" id="show" required>
+          <option value="" disabled selected>Select show</option>
           <option value="acoustic">Acoustic storytelling</option>
           <option value="rock">Indie rock mayhem</option>
           <option value="fusion">Folk-fusion carnival</option>
@@ -162,8 +186,9 @@
       </div>
 
       <div class="page">
-        <label>What’s your audience’s favorite drink?</label>
-        <select name="drink">
+        <label for="drink">What’s your audience’s favorite drink?</label>
+        <select name="drink" id="drink" required>
+          <option value="" disabled selected>Select drink</option>
           <option value="coffee">Craft coffee</option>
           <option value="cocktail">Signature cocktails</option>
           <option value="beer">Homebrew beer</option>
@@ -180,6 +205,13 @@
     const pages = document.querySelectorAll('.page');
 
     function nextPage() {
+      // Simple validation for select inputs
+      const currentSelect = pages[currentPage].querySelector('select');
+      if (!currentSelect.value) {
+        alert('Please select an option before proceeding.');
+        return;
+      }
+
       if (currentPage < pages.length - 2) {
         pages[currentPage].classList.remove('active');
         currentPage++;
@@ -192,6 +224,11 @@
       const vibe = form['vibe'].value;
       const show = form['show'].value;
       const drink = form['drink'].value;
+
+      if (!vibe || !show || !drink) {
+        alert('Please answer all questions before finishing.');
+        return;
+      }
 
       let result = "";
 
