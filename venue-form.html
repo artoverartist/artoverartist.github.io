@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Flow - Venue Quiz</title>
+  <title>Ask Eve - Venue Quiz</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     /* Base and retro colors */
@@ -150,7 +150,7 @@
 </head>
 <body>
   <nav>
-    <h1>Flow</h1>
+    <h1>Ask Eve</h1>
     <div>
       <a href="index.html">Home</a>
       <a href="venue-form.html">Venue</a>
@@ -205,13 +205,11 @@
     const pages = document.querySelectorAll('.page');
 
     function nextPage() {
-      // Simple validation for select inputs
       const currentSelect = pages[currentPage].querySelector('select');
       if (!currentSelect.value) {
         alert('Please select an option before proceeding.');
         return;
       }
-
       if (currentPage < pages.length - 2) {
         pages[currentPage].classList.remove('active');
         currentPage++;
