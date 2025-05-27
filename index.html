@@ -17,18 +17,11 @@
       font-family: 'Poppins', Arial, sans-serif;
       background: linear-gradient(135deg, #000000, #1c1c1c);
       color: #f8f8f8;
+      min-height: 100vh;
+      overflow-x: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      overflow-x: hidden;
-      animation: fadeInBody 1.2s ease forwards;
-    }
-
-    /* Fade in animation */
-    @keyframes fadeInBody {
-      from {opacity: 0;}
-      to {opacity: 1;}
     }
 
     /* Brand logo Ask Eve */
@@ -45,8 +38,8 @@
       margin: 2rem 0 0.5rem;
       user-select: none;
       cursor: default;
-      animation: fadeInBrand 1.5s ease forwards;
       opacity: 0;
+      animation: fadeInBrand 1.5s ease forwards;
     }
 
     @keyframes fadeInBrand {
@@ -63,8 +56,10 @@
       text-align: center;
       max-width: 400px;
       user-select: none;
-      animation: fadeInTagline 1.8s ease forwards;
       opacity: 0;
+      animation: fadeInTagline 1.8s ease forwards;
+      animation-delay: 0.5s;
+      animation-fill-mode: forwards;
     }
 
     @keyframes fadeInTagline {
@@ -87,8 +82,10 @@
       justify-content: center;
       width: 100%;
       max-width: 960px;
-      animation: fadeInNav 2.1s ease forwards;
       opacity: 0;
+      animation: fadeInNav 2.1s ease forwards;
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
     }
 
     @keyframes fadeInNav {
@@ -113,15 +110,40 @@
       outline: none;
     }
 
+    /* Animated intro text container */
+    #animated-text {
+      font-size: 1.3rem;
+      max-width: 500px;
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+      font-weight: 500;
+      color: #ff1493cc;
+      animation: fadeSlideIn 2.5s ease forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     /* Venue Entry Form */
     form {
       background: rgba(255, 255, 255, 0.07);
       padding: 2rem 3rem;
       border-radius: 20px;
       box-shadow: 0 10px 25px #ff1493bb;
-      max-width: 460px;
+      max-width: 600px;
       width: 90%;
-      animation: fadeInForm 2.4s ease forwards;
+      font-weight: 600;
+      animation: fadeInForm 3s ease forwards;
       opacity: 0;
     }
 
@@ -134,26 +156,28 @@
       color: #ff1493;
       font-weight: 700;
       font-size: 2rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.5rem;
       user-select: none;
+      text-align: center;
     }
 
     label {
       display: block;
       margin-bottom: 0.5rem;
-      font-weight: 600;
       color: #ff1493cc;
+      font-weight: 600;
       user-select: none;
     }
 
     input[type="text"],
     input[type="email"],
+    select,
     textarea {
       width: 100%;
       padding: 0.7rem 1rem;
       border: none;
       border-radius: 12px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       font-size: 1rem;
       font-family: 'Poppins', sans-serif;
       background: #111111;
@@ -164,6 +188,7 @@
 
     input[type="text"]:focus,
     input[type="email"]:focus,
+    select:focus,
     textarea:focus {
       outline: none;
       box-shadow: 0 0 10px #ff1493cc;
@@ -197,7 +222,7 @@
     }
 
     /* Responsive */
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       #brand {
         font-size: 2.8rem;
       }
@@ -218,6 +243,10 @@
         padding: 1.5rem 2rem;
         max-width: 90vw;
       }
+      #animated-text {
+        max-width: 90vw;
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
@@ -227,15 +256,19 @@
     <div id="brand" aria-label="Brand name Ask Eve">Ask Eve</div>
     <div id="tagline">Ask Eve. She's quick, in the know, and your new best friend.</div>
     <nav role="navigation" aria-label="Primary navigation menu">
-      <a href="index.html" tabindex="0" aria-current="page">Home</a>
-      <a href="venue-form.html" tabindex="0">Venue Form</a>
-      <a href="match-results.html" tabindex="0">Match Results</a>
-      <a href="qr-tip.html" tabindex="0">QR Tip</a>
-      <a href="login.html" tabindex="0">Login</a>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="venue-form.html">Venue Form</a>
+      <a href="match-results.html">Match Results</a>
+      <a href="qr-tip.html">QR Tip</a>
+      <a href="login.html">Login</a>
     </nav>
   </header>
 
   <main>
+    <section id="animated-text" aria-live="polite">
+      <p>Welcome to Ask Eve — your venue's new best friend for effortless event programming. Just fill out the details below, and Eve will match you with the perfect artists to make your stage unforgettable.</p>
+    </section>
+
     <form action="save-venue-entry.php" method="POST" aria-label="Venue entry form">
       <h2>Venue Entry</h2>
 
@@ -247,6 +280,26 @@
 
       <label for="location">Location</label>
       <input type="text" id="location" name="location" required placeholder="City, Area, etc." />
+
+      <label for="capacity">Capacity</label>
+      <input type="text" id="capacity" name="capacity" placeholder="Approximate audience size" />
+
+      <label for="budget">Budget</label>
+      <input type="text" id="budget" name="budget" placeholder="Your estimated budget" />
+
+      <label for="genres">Preferred Genres</label>
+      <select id="genres" name="genres" multiple size="4" aria-describedby="genresHelp">
+        <option value="rock">Rock</option>
+        <option value="pop">Pop</option>
+        <option value="jazz">Jazz</option>
+        <option value="electronic">Electronic</option>
+        <option value="hiphop">Hip-Hop</option>
+        <option value="classical">Classical</option>
+      </select>
+      <small id="genresHelp" style="color:#ff1493cc; margin-bottom: 1.5rem; display: block;">Hold Ctrl (Cmd on Mac) to select multiple</small>
+
+      <label for="eventDates">Event Dates</label>
+      <input type="text" id="eventDates" name="eventDates" placeholder="Preferred dates (e.g., 20-22 June)" />
 
       <label for="notes">Additional Notes</label>
       <textarea id="notes" name="notes" placeholder="Anything else you'd like to add?"></textarea>
