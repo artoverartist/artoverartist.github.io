@@ -2,48 +2,101 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Artist Match Results - Stagecraft</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Artist Match Results - Flow</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Helvetica Neue', sans-serif;
-      background: linear-gradient(to right, #141e30, #243b55);
-      color: #fff;
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Pacifico&display=swap');
+
+    /* Reset & base */
+    body, html {
+      margin: 0; padding: 0; height: 100%;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #f3f4f6;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    .card-container {
+    /* Brand "Flow" */
+    #brand {
+      font-family: 'Pacifico', cursive;
+      font-size: 4rem;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: floatScale 3s ease-in-out infinite;
+      margin: 1rem auto 0.5rem;
+      user-select: none;
+      text-align: center;
+    }
+    @keyframes floatScale {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.05); }
+    }
+
+    /* Navigation menu */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      padding: 0.5rem 0 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      margin: 0 auto 1rem;
+      max-width: 960px;
+      user-select: none;
+    }
+    nav a {
+      color: #f3f4f6;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 12px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      font-size: 1.1rem;
+    }
+    nav a:hover, nav a:focus {
+      background: #ff416c;
+      color: white;
+      outline: none;
+      box-shadow: 0 4px 10px rgba(255,65,108,0.6);
+    }
+
+    /* Main content container */
+    main {
+      flex-grow: 1;
+      max-width: 980px;
+      margin: 0 auto 2rem;
+      padding: 0 1rem;
       display: flex;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
       gap: 2rem;
-      padding: 2rem;
-      width: 100%;
-      max-width: 100vw;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
 
+    /* Artist card */
     .artist-card {
       flex: 0 0 auto;
       scroll-snap-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 1.5rem;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
       overflow: hidden;
       width: 300px;
-      height: 500px;
+      height: 520px;
       display: flex;
       flex-direction: column;
-      transition: transform 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
     }
-
-    .artist-card:hover {
+    .artist-card:hover, .artist-card:focus-within {
       transform: scale(1.05);
+      box-shadow: 0 12px 40px rgba(255,75,43,0.6);
+      outline: none;
     }
 
     .artist-image {
@@ -51,74 +104,149 @@
       height: 60%;
       background-size: cover;
       background-position: center;
+      border-bottom: 3px solid #ff416c;
+      border-radius: 20px 20px 0 0;
     }
 
     .artist-details {
-      padding: 1rem;
+      padding: 1rem 1.25rem;
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      flex-grow: 1;
     }
 
     .artist-name {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #ff4b2b;
     }
 
     .artist-rating {
-      display: flex;
-      gap: 0.25rem;
       color: gold;
+      font-size: 1.25rem;
+      user-select: none;
     }
 
     .artist-review {
-      font-size: 0.9rem;
-      color: #ccc;
+      font-size: 1rem;
+      color: #ddd;
+      flex-grow: 1;
+      font-style: italic;
+      line-height: 1.3;
     }
 
     .feedback-button {
       margin-top: auto;
-      background: #ff4b2b;
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
       border: none;
       color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 1rem;
+      padding: 0.65rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
       cursor: pointer;
       align-self: flex-start;
+      box-shadow: 0 4px 15px rgba(255,75,43,0.6);
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+    .feedback-button:hover, .feedback-button:focus {
+      background: linear-gradient(45deg, #ff5a7b, #ff755f);
+      outline: none;
+    }
+
+    /* Scrollbar styles */
+    main::-webkit-scrollbar {
+      height: 12px;
+    }
+    main::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    main::-webkit-scrollbar-thumb {
+      background: #ff416c;
+      border-radius: 6px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      #brand {
+        font-size: 3rem;
+      }
+      nav {
+        gap: 12px;
+        padding: 0.5rem 0 1rem;
+      }
+      nav a {
+        font-size: 1rem;
+        padding: 6px 10px;
+      }
+      main {
+        gap: 1rem;
+        padding-bottom: 1rem;
+      }
+      .artist-card {
+        width: 260px;
+        height: 470px;
+      }
+      .artist-name {
+        font-size: 1.3rem;
+      }
+      .artist-rating {
+        font-size: 1.1rem;
+      }
+      .artist-review {
+        font-size: 0.9rem;
+      }
+      .feedback-button {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card-container">
-    <div class="artist-card">
+  <header>
+    <div id="brand" aria-label="Brand name Flow">Flow</div>
+    <nav role="navigation" aria-label="Primary navigation menu">
+      <a href="index.html" tabindex="0">Home</a>
+      <a href="venue-form.html" tabindex="0">Venue Form</a>
+      <a href="match-results.html" tabindex="0" aria-current="page">Match Results</a>
+      <a href="qr-tip.html" tabindex="0">QR Tip</a>
+      <a href="login.html" tabindex="0">Login</a>
+    </nav>
+  </header>
+
+  <main>
+    <article class="artist-card" tabindex="0" aria-label="Artist Kayan profile">
       <div class="artist-image" style="background-image: url('https://th.bing.com/th/id/OIP.EKRrODAFcSKeuxbw5nB-jwHaE-?rs=1&pid=ImgDetMain');"></div>
       <div class="artist-details">
-        <div class="artist-name">Kayan</div>
-        <div class="artist-rating">★★★★★</div>
-        <div class="artist-review">“Kayan’s set lit up our Friday night gig—simply magical!”</div>
-        <button class="feedback-button">View Full Profile</button>
+        <h2 class="artist-name">Kayan</h2>
+        <div class="artist-rating" aria-label="Five stars">★★★★★</div>
+        <p class="artist-review">“Kayan’s set lit up our Friday night gig—simply magical!”</p>
+        <button class="feedback-button" aria-label="View full profile of Kayan">View Full Profile</button>
       </div>
-    </div>
+    </article>
 
-    <div class="artist-card">
+    <article class="artist-card" tabindex="0" aria-label="Artist Hanumankind profile">
       <div class="artist-image" style="background-image: url('https://th.bing.com/th/id/OIP.VXwgFTwb5R7ilIsdtoRzxgHaEs?rs=1&pid=ImgDetMain');"></div>
       <div class="artist-details">
-        <div class="artist-name">Hanumankind</div>
-        <div class="artist-rating">★★★★☆</div>
-        <div class="artist-review">“Energetic and engaging! Great for high-energy nights.”</div>
-        <button class="feedback-button">View Full Profile</button>
+        <h2 class="artist-name">Hanumankind</h2>
+        <div class="artist-rating" aria-label="Four stars">★★★★☆</div>
+        <p class="artist-review">“Energetic and engaging! Great for high-energy nights.”</p>
+        <button class="feedback-button" aria-label="View full profile of Hanumankind">View Full Profile</button>
       </div>
-    </div>
+    </article>
 
-    <div class="artist-card">
+    <article class="artist-card" tabindex="0" aria-label="Artist John Mayer profile">
       <div class="artist-image" style="background-image: url('https://th.bing.com/th/id/OIP.L8ATwkJeRjoh70uJn5lxzgHaJQ?w=1600&h=2000&rs=1&pid=ImgDetMain');"></div>
       <div class="artist-details">
-        <div class="artist-name">John Mayer</div>
-        <div class="artist-rating">★★★★★</div>
-        <div class="artist-review">“Perfect blend of soul and pop. The crowd loved it!”</div>
-        <button class="feedback-button">View Full Profile</button>
+        <h2 class="artist-name">John Mayer</h2>
+        <div class="artist-rating" aria-label="Five stars">★★★★★</div>
+        <p class="artist-review">“Perfect blend of soul and pop. The crowd loved it!”</p>
+        <button class="feedback-button" aria-label="View full profile of John Mayer">View Full Profile</button>
       </div>
-    </div>
-  </div>
+    </article>
+  </main>
 </body>
 </html>
