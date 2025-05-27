@@ -1,189 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stagecraft Demo</title>
-<style>
-  body, html {
-    margin:0; padding:0; height:100%; background:#000; color:#fff; font-family: Arial, sans-serif;
-    display: flex; align-items: center; justify-content: center; flex-direction: column;
-  }
-  #animation {
-    font-size: 2rem; max-width: 600px; text-align: center;
-    transition: opacity 0.8s ease;
-  }
-  #animation.hidden {
-    opacity: 0; pointer-events: none;
-  }
-  #form-container {
-    display: none;
-    flex-direction: column;
-    max-width: 400px;
-    width: 100%;
-    background: #222;
-    padding: 20px;
-    border-radius: 12px;
-  }
-  #form-container.show {
-    display: flex;
-  }
-  label {
-    margin-top: 15px;
-  }
-  input, select, textarea {
-    margin-top: 5px;
-    padding: 8px;
-    border-radius: 5px;
-    border: none;
-    width: 100%;
-    font-size: 1rem;
-  }
-  button.submit-btn {
-    margin-top: 20px;
-    padding: 12px;
-    font-size: 1.1rem;
-    background: #ff416c;
-    border: none;
-    border-radius: 30px;
-    color: white;
-    cursor: pointer;
-  }
-  .buttons {
-    margin-top: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  .buttons a {
-    background: #ff4b2b;
-    padding: 12px;
-    border-radius: 25px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    cursor: pointer;
-  }
-  .buttons a:hover {
-    background: #ff6650;
-  }
-</style>
-</head>
-<body>
-
-<div id="animation">Stagecraft is your partner in seamless programming.</div>
-
-<div id="form-container" aria-hidden="true">
-  <form id="venueForm" aria-label="Venue Submission Form">
-    <label for="venueName">Venue Name:</label>
-    <input type="text" id="venueName" name="venueName" required />
-
-    <label for="city">Location:</label>
-    <select id="city" name="city" required>
-      <option value="">Select a city</option>
-      <option value="Pune">Pune</option>
-      <option value="Bangalore">Bangalore</option>
-      <option value="Mumbai">Mumbai</option>
-      <option value="Delhi">Delhi</option>
-      <option value="Chennai">Chennai</option>
-      <option value="Hyderabad">Hyderabad</option>
-      <option value="Jaipur">Jaipur</option>
-    </select>
-
-    <label for="genre">Preferred Genre:</label>
-    <select id="genre" name="genre" required>
-      <option value="Pop">Pop</option>
-      <option value="Rock">Rock</option>
-      <option value="Electronic">Electronic</option>
-      <option value="Jazz">Jazz</option>
-      <option value="Classical">Classical</option>
-      <option value="Indie">Indie</option>
-    </select>
-
-    <label for="frequency">Gig Frequency:</label>
-    <select id="frequency" name="frequency">
-      <option value="Weekly">Weekly</option>
-      <option value="Bi-weekly">Bi-weekly</option>
-      <option value="Monthly">Monthly</option>
-    </select>
-
-    <label for="budget">Monthly Budget (₹):</label>
-    <select id="budget" name="budget" required>
-      <option value="3000">Up to ₹3000</option>
-      <option value="5000">Up to ₹5000</option>
-      <option value="7000">Up to ₹7000</option>
-      <option value="10000">Up to ₹10,000</option>
-      <option value="15000">Above ₹10,000</option>
-    </select>
-
-    <label for="gigTimings">Preferred Gig Timings:</label>
-    <input type="text" id="gigTimings" name="gigTimings" placeholder="e.g. Fridays 8-10 PM" />
-
-    <label for="fnb">Artist F&B Policy:</label>
-    <textarea id="fnb" name="fnb" placeholder="e.g. 2 drinks and 1 meal provided per artist"></textarea>
-
-    <button type="submit" class="submit-btn">Submit</button>
-
-    <div class="buttons">
-      <a href="match-results.html" tabindex="0">Sample Artist Profiles</a>
-      <a href="venue-form.html" tabindex="0">Try out this fun quiz to know your venue's taste</a>
-    </div>
-  </form>
-</div>
-
-<script>
-  const phrases = [
-    "Stagecraft is your partner in seamless programming.",
-    "No more last-minute calls. No more empty slots.",
-    "Filter from curated artist profiles.",
-    "We manage your entire event calendar—so you can focus on what matters: creating unforgettable memories.",
-    "No contracts. No hassle. Just music that makes sense."
-  ];
-
-  const animationDiv = document.getElementById('animation');
-  const formContainer = document.getElementById('form-container');
-
-  let index = 0;
-
-  function showNextPhrase() {
-    animationDiv.style.opacity = 0;  // fade out
-    setTimeout(() => {
-      animationDiv.textContent = phrases[index];
-      animationDiv.style.opacity = 1;  // fade in
-      index++;
-      if(index >= phrases.length) {
-        clearInterval(interval);
-        // After last phrase show, hide animation, show form & buttons
-        setTimeout(() => {
-          animationDiv.classList.add('hidden');
-          formContainer.classList.add('show');
-          formContainer.setAttribute('aria-hidden', 'false');
-        }, 1500); // wait a bit so last phrase is visible briefly before transition
-      }
-    }, 800);
-  }
-
-  // Start cycling phrases every 4 seconds
-  showNextPhrase(); // show first immediately
-  const interval = setInterval(() => {
-    if(index < phrases.length) {
-      showNextPhrase();
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
-  }, 4000);
 
-  // Form submit download JSON functionality (optional)
-  document.getElementById('venueForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const formData = Object.fromEntries(new FormData(e.target).entries());
-    const blob = new Blob([JSON.stringify(formData, null, 2)], { type: 'application/json' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    const fileName = (formData.venueName || "venue") + "_submission.json";
-    a.download = fileName.replace(/\s+/g, '_');
-    a.click();
-  });
-</script>
+    nav {
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
 
+    nav h1 {
+      margin: 0;
+      font-size: 1.5em;
+      color: #FF4B2B;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 1em;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      color: #FF4B2B;
+    }
+
+    #animation {
+      font-size: 2rem;
+      max-width: 600px;
+      text-align: center;
+      transition: opacity 0.8s ease;
+      padding-top: 80px;
+    }
+
+    #animation.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #form-container {
+      display: none;
+      flex-direction: row;
+      padding: 2em;
+      width: 100%;
+      max-width: 1200px;
+      justify-content: center;
+    }
+
+    #form-container.show {
+      display: flex;
+    }
+
+    .form-section {
+      flex: 2;
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 2em;
+      border-radius: 12px;
+    }
+
+    .image-section {
+      flex: 1;
+      padding-left: 2em;
+    }
+
+    .image-section img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin: 1em 0;
+      padding: 0.8em;
+      border-radius: 8px;
+      border: none;
+      font-size: 1em;
+    }
+
+    button {
+      background-color: #FF4B2B;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e64321;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <h1>Flow</h1>
+    <div>
+      <a href="index.html">Home</a>
+      <a href="venue-form.html">Venue</a>
+      <a href="match-request.html">Artists</a>
+      <a href="qr-tip.html">QR Tips</a>
+      <a href="login.html">Login</a>
+    </div>
+  </nav>
+
+  <div id="animation">Flow is your partner in seamless programming.</div>
+
+  <div id="form-container" aria-hidden="true">
+    <div class="form-section">
+      <h2>Venue Details</h2>
+      <form id="venueForm">
+        <input type="text" name="venueName" placeholder="Venue Name" required>
+        <input type="text" name="location" placeholder="Location" required>
+        <select name="genre" required>
+          <option value="">Select Genre</option>
+          <option value="Jazz">Jazz</option>
+          <option value="Rock">Rock</option>
+          <option value="Electronic">Electronic</option>
+          <option value="Pop">Pop</option>
+        </select>
+        <input type="number" name="budget" placeholder="Budget (USD)" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="image-section">
+      <img src="https://i.pinimg.com/736x/89/fb/c7/89fbc7d72bcb4470add8c5c8629e8ce5.jpg" alt="Side Image">
+    </div>
+  </div>
+
+  <script>
+    const phrases = [
+      "Flow is your partner in seamless programming.",
+      "No more last-minute calls. No more empty slots.",
+      "Filter from curated artist profiles.",
+      "We manage your entire event calendar, so you can focus on what matters.",
+      "No contracts. No hassle. Just good music."
+    ];
+
+    const animationDiv = document.getElementById('animation');
+    const formContainer = document.getElementById('form-container');
+
+    let index = 0;
+
+    function showNextPhrase() {
+      animationDiv.style.opacity = 0;
+      setTimeout(() => {
+        animationDiv.textContent = phrases[index];
+        animationDiv.style.opacity = 1;
+        index++;
+        if (index >= phrases.length) {
+          clearInterval(interval);
+          setTimeout(() => {
+            animationDiv.classList.add('hidden');
+            formContainer.classList.add('show');
+            formContainer.setAttribute('aria-hidden', 'false');
+          }, 1500);
+        }
+      }, 800);
+    }
+
+    showNextPhrase();
+    const interval = setInterval(() => {
+      if (index < phrases.length) {
+        showNextPhrase();
+      }
+    }, 4000);
+
+    document.getElementById('venueForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      let csv = 'Venue Name,Location,Genre,Budget\n';
+      csv += `${formData.get('venueName')},${formData.get('location')},${formData.get('genre')},${formData.get('budget')}\n`;
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.setAttribute('href', URL.createObjectURL(blob));
+      link.setAttribute('download', `${formData.get('venueName')}_submission.csv`);
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  </script>
 </body>
+
 </html>
