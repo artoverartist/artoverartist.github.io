@@ -2,175 +2,118 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giggo - Start Your Story</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Giggo | Artist Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Fredoka', sans-serif;
-    }
-
     body {
-      background: linear-gradient(to bottom right, #fcdde2, #c6d4ff);
+      margin: 0;
+      font-family: 'Baloo 2', cursive;
+      background: #f0f9f4;
       color: #333;
-      overflow-x: hidden;
     }
 
     header {
+      background-color: #58cc02;
+      padding: 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1rem 2rem;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    header img {
-      height: 60px;
-    }
-
-    header .login-btn {
-      background: #ff6b81;
-      border: none;
-      padding: 0.5rem 1rem;
       color: white;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
     }
 
-    .container {
+    header h1 {
+      font-size: 1.8rem;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .gecko-logo {
+      width: 40px;
+    }
+
+    .main-container {
+      padding: 2rem;
+    }
+
+    .course-tree {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .node {
+      background: white;
+      border: 4px solid #58cc02;
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      display: flex;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .giggo {
-      width: 120px;
-      animation: float 3s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-      100% {
-        transform: translateY(0);
-      }
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: #4e3cc9;
-    }
-
-    form {
-      width: 100%;
-      background: #fff;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    form label {
-      display: block;
-      margin: 1rem 0 0.3rem;
-      font-weight: 500;
-    }
-
-    form input,
-    form select,
-    form textarea {
-      width: 100%;
-      padding: 0.6rem;
-      border: 2px solid #ccc;
-      border-radius: 10px;
       font-size: 1rem;
-    }
-
-    form button {
-      margin-top: 1.5rem;
-      background: #4e3cc9;
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    footer {
-      margin-top: 2rem;
       text-align: center;
-      font-size: 0.9rem;
-      color: #666;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .node:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: white;
+      border-top: 2px solid #ddd;
+      display: flex;
+      justify-content: space-around;
+      padding: 0.75rem 0;
+    }
+
+    .nav-bar button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: #58cc02;
+    }
+
+    .nav-bar button:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <img src="giggo-gecko-logo.png" alt="Encore Logo" />
-    <button class="login-btn">Artist Login</button>
+    <h1><img src="giggo-logo.png" alt="Giggo" class="gecko-logo">Giggo</h1>
+    <div>Hi, Artist!</div>
   </header>
 
-  <div class="container">
-    <img src="giggo.png" alt="Giggo the Gecko" class="giggo" />
-    <h1>Describe your venue's vibe and let the magic begin!</h1>
-    <form action="submit_form.php" method="POST">
-      <label for="location">Place / Location</label>
-      <input type="text" name="location" required />
+  <main class="main-container">
+    <h2>Your Performance Journey</h2>
+    <div class="course-tree">
+      <div class="node">Bio</div>
+      <div class="node">Skills</div>
+      <div class="node">Repertoire</div>
+      <div class="node">Videos</div>
+      <div class="node">Ratings</div>
+      <div class="node">Tips</div>
+      <div class="node">Testimonials</div>
+    </div>
+  </main>
 
-      <label for="vibe">Describe the Vibe / Style</label>
-      <textarea name="vibe" rows="3" required></textarea>
-
-      <label for="regularity">How often do you host gigs?</label>
-      <select name="regularity">
-        <option value="Weekly">Weekly</option>
-        <option value="Biweekly">Biweekly</option>
-        <option value="Monthly">Monthly</option>
-        <option value="Occasional">Occasional</option>
-      </select>
-
-      <label for="budget">Budget (₹)</label>
-      <select name="budget">
-        <option value="Below 10,000">Below ₹10,000</option>
-        <option value="10,000 - 25,000">₹10,000 - ₹25,000</option>
-        <option value="25,000 - 50,000">₹25,000 - ₹50,000</option>
-        <option value="Above 50,000">Above ₹50,000</option>
-      </select>
-
-      <label for="timings">Preferred Gig Timings</label>
-      <input type="text" name="timings" placeholder="e.g., 7PM - 10PM" />
-
-      <label for="fnb">F&B Policy for Artists</label>
-      <select name="fnb">
-        <option value="Drinks only">Drinks only</option>
-        <option value="Drinks and snacks">Drinks and snacks</option>
-        <option value="Full meal">Full meal</option>
-        <option value="No complimentary items">No complimentary items</option>
-      </select>
-
-      <button type="submit">Submit</button>
-    </form>
-  </div>
-
-  <footer>
-    Made with 🦎 by Team Giggo. Say hi to Giggo the Gecko!
-  </footer>
+  <nav class="nav-bar">
+    <button>Home</button>
+    <button>Gigs</button>
+    <button>Tips</button>
+    <button>Profile</button>
+  </nav>
 </body>
 
 </html>
