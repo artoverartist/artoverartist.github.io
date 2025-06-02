@@ -1,183 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Giggo the Gecko - Artist Portal</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Encore - Start Your Story</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom right, #A8FF3E, #024F20);
-      color: #1a1a1a;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Fredoka', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #fcdde2, #c6d4ff);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding: 2rem;
-      min-height: 100vh;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    h1, h2 {
-      font-family: 'Comic Sans MS', cursive;
-      color: #013220;
-      text-shadow: 2px 2px #A8FF3E;
+    header img {
+      height: 60px;
     }
 
-    .gecko-logo {
-      background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Gecko_icon.svg/1200px-Gecko_icon.svg.png') no-repeat center center;
-      background-size: contain;
-      width: 80px;
-      height: 80px;
-      margin-bottom: 1rem;
+    header .login-btn {
+      background: #ff6b81;
+      border: none;
+      padding: 0.5rem 1rem;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
     }
 
     .container {
-      background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      max-width: 500px;
-      width: 100%;
-      margin-bottom: 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .giggo {
+      width: 120px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #4e3cc9;
     }
 
     form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      width: 100%;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     }
 
-    input, textarea, select, button {
-      padding: 0.8rem;
-      border: none;
-      border-radius: 0.5rem;
+    form label {
+      display: block;
+      margin: 1rem 0 0.3rem;
+      font-weight: 500;
+    }
+
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 0.6rem;
+      border: 2px solid #ccc;
+      border-radius: 10px;
       font-size: 1rem;
     }
 
-    input, textarea, select {
-      background: #ecffdd;
-      color: #013220;
-    }
-
-    button {
-      background: linear-gradient(to right, #C6FF00, #76FF03);
-      color: #000;
-      font-weight: bold;
+    form button {
+      margin-top: 1.5rem;
+      background: #4e3cc9;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      font-weight: bold;
     }
 
-    button:hover {
-      background: linear-gradient(to right, #76FF03, #C6FF00);
-    }
-
-    .link-container {
+    footer {
       margin-top: 2rem;
       text-align: center;
-    }
-
-    .link-container a {
-      color: #014421;
-      font-weight: bold;
-    }
-
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 0.5rem;
-    }
-
-    .day {
-      background: #d1f7c4;
-      padding: 0.5rem;
-      text-align: center;
-      border-radius: 0.3rem;
-      cursor: pointer;
-    }
-
-    .day.selected {
-      background: #76FF03;
-      color: #fff;
-      font-weight: bold;
+      font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
+
 <body>
-  <div class="gecko-logo"></div>
-  <h1>Welcome to Giggo the Gecko</h1>
+  <header>
+    <img src="giggo-gecko-logo.png" alt="Encore Logo" />
+    <button class="login-btn">Artist Login</button>
+  </header>
 
   <div class="container">
-    <h2>Artist Login / Sign Up</h2>
-    <form id="loginForm">
-      <input type="email" placeholder="Email" required />
-      <input type="password" placeholder="Password" required />
-      <button type="submit">Log In / Sign Up</button>
+    <img src="giggo.png" alt="Giggo the Gecko" class="giggo" />
+    <h1>Describe your venue's vibe and let the magic begin!</h1>
+    <form action="submit_form.php" method="POST">
+      <label for="location">Place / Location</label>
+      <input type="text" name="location" required />
+
+      <label for="vibe">Describe the Vibe / Style</label>
+      <textarea name="vibe" rows="3" required></textarea>
+
+      <label for="regularity">How often do you host gigs?</label>
+      <select name="regularity">
+        <option value="Weekly">Weekly</option>
+        <option value="Biweekly">Biweekly</option>
+        <option value="Monthly">Monthly</option>
+        <option value="Occasional">Occasional</option>
+      </select>
+
+      <label for="budget">Budget (₹)</label>
+      <select name="budget">
+        <option value="Below 10,000">Below ₹10,000</option>
+        <option value="10,000 - 25,000">₹10,000 - ₹25,000</option>
+        <option value="25,000 - 50,000">₹25,000 - ₹50,000</option>
+        <option value="Above 50,000">Above ₹50,000</option>
+      </select>
+
+      <label for="timings">Preferred Gig Timings</label>
+      <input type="text" name="timings" placeholder="e.g., 7PM - 10PM" />
+
+      <label for="fnb">F&B Policy for Artists</label>
+      <select name="fnb">
+        <option value="Drinks only">Drinks only</option>
+        <option value="Drinks and snacks">Drinks and snacks</option>
+        <option value="Full meal">Full meal</option>
+        <option value="No complimentary items">No complimentary items</option>
+      </select>
+
+      <button type="submit">Submit</button>
     </form>
   </div>
 
-  <div class="container">
-    <h2>Artist Onboarding</h2>
-    <form id="artistForm">
-      <input type="text" placeholder="Stage Name" required />
-      <textarea placeholder="Tell us about your act (bio, genre, vibe)" required></textarea>
-      <select required>
-        <option value="">Select Genre</option>
-        <option>Jazz</option>
-        <option>Indie</option>
-        <option>Electronic</option>
-        <option>Pop</option>
-        <option>Folk</option>
-        <option>Fusion</option>
-      </select>
-      <select required>
-        <option value="">Preferred Budget</option>
-        <option>Under $100</option>
-        <option>$100 - $300</option>
-        <option>$300 - $500</option>
-        <option>$500+</option>
-      </select>
-      <input type="text" placeholder="Preferred City/Location" required />
-      <textarea placeholder="Social Media / Website Links" /></textarea>
-      <textarea placeholder="Booking Contact Info" required></textarea>
-      <textarea placeholder="Any tech or space requirements?" />
-
-      <h3>Mark Your Availability</h3>
-      <div class="calendar" id="calendar"></div>
-
-      <button type="submit">Generate My Giggo Link</button>
-    </form>
-  </div>
-
-  <div class="link-container" id="shareLink" style="display:none;">
-    <p>Here's your unique link to share with venues for reviews and ratings:</p>
-    <a href="#" id="artistLink">https://giggo.app/review/your-id</a>
-  </div>
-
-  <script>
-    const artistForm = document.getElementById("artistForm");
-    const shareLink = document.getElementById("shareLink");
-    const artistLink = document.getElementById("artistLink");
-    const calendar = document.getElementById("calendar");
-
-    // Generate a simple calendar for 30 days
-    for (let i = 1; i <= 30; i++) {
-      const day = document.createElement("div");
-      day.classList.add("day");
-      day.textContent = i;
-      day.addEventListener("click", () => {
-        day.classList.toggle("selected");
-      });
-      calendar.appendChild(day);
-    }
-
-    artistForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const uniqueId = Math.random().toString(36).substring(2, 8);
-      artistLink.href = `https://giggo.app/review/${uniqueId}`;
-      artistLink.textContent = `https://giggo.app/review/${uniqueId}`;
-      shareLink.style.display = "block";
-    });
-  </script>
+  <footer>
+    Made with 🦎 by Team Encore. Say hi to Giggo the Gecko!
+  </footer>
 </body>
+
 </html>
